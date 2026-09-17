@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.SemanticsActions.OnClick
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -85,22 +87,43 @@ fun ButtonScreen(){
             .padding(12.dp)
     ){
         //title
-        Text(text="Decide For Me!", fontSize = 24.em, textAlign=TextAlign.Center)
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(text="Should I Go?", fontSize =  12.em, textAlign=TextAlign.Center)
+
         Text(
             text = "Buttons Pressed: $buttonCounter",
-            fontSize = 32.sp
+            fontSize = 32.sp,
+            modifier = Modifier.weight(1f)
         )
     }
+    Spacer(modifier = Modifier.height(16.dp))
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(12.dp)
     ){ //button column
-        Row(){
+        Row(modifier = Modifier.fillMaxWidth()){
             //button one: yes button (80%)
+            Button(
+                onClick ={
+                    buttonCounter++
+                }
+            ){
+                Text(text="Yes!")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
             //button two: maybe button (50%)
+            Button(
+                onClick ={buttonCounter++}
+            ){
+                Text(text="Maybe...")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
             //button three: ehh button (15%)
+            Button(
+                onClick ={buttonCounter++}
+            ){
+                Text(text="Nah.")
+            }
         }
     }
     Column(modifier = Modifier
